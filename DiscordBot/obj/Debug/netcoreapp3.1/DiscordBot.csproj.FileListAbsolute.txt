@@ -12,3 +12,12 @@ C:\Users\MohoPoho\source\repos\DiscordBot\DiscordBot\obj\Debug\netcoreapp3.1\Dis
 C:\Users\MohoPoho\source\repos\DiscordBot\DiscordBot\bin\Debug\netcoreapp3.1\DSharpPlus.CommandsNext.dll
 C:\Users\MohoPoho\source\repos\DiscordBot\DiscordBot\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.dll
 C:\Users\MohoPoho\source\repos\DiscordBot\DiscordBot\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\MohoPoho\source\repos\DiscordBot\DiscordBot\bin\Debug\netcoreapp3.1\ConcurrentCollections.dll
+C:\Users\MohoPoho\source\repos\DiscordBot\DiscordBot\bin\Debug\netcoreapp3.1\DSharpPlus.Interactivity.dll
+C:\Users\MohoPoho\source\repos\DiscordBot\DiscordBot\bin\Debug\netcoreapp3.1\Discord.Net.Commands.dll
+C:\Users\MohoPoho\source\repos\DiscordBot\DiscordBot\bin\Debug\netcoreapp3.1\Discord.Net.Core.dll
+C:\Users\MohoPoho\source\repos\DiscordBot\DiscordBot\bin\Debug\netcoreapp3.1\Discord.Net.Rest.dll
+C:\Users\MohoPoho\source\repos\DiscordBot\DiscordBot\bin\Debug\netcoreapp3.1\Discord.Net.Webhook.dll
+C:\Users\MohoPoho\source\repos\DiscordBot\DiscordBot\bin\Debug\netcoreapp3.1\Discord.Net.WebSocket.dll
+C:\Users\MohoPoho\source\repos\DiscordBot\DiscordBot\bin\Debug\netcoreapp3.1\System.Interactive.Async.dll
+C:\Users\MohoPoho\source\repos\DiscordBot\DiscordBot\bin\Debug\netcoreapp3.1\System.Linq.Async.dll

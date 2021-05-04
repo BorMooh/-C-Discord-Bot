@@ -50,6 +50,22 @@
             "DSharpPlus.Interactivity": {
               "target": "Package",
               "version": "[4.1.0-nightly-00857, )"
+            },
+            "Discord.Net": {
+              "target": "Package",
+              "version": "[2.3.1, )"
+            },
+            "Discord.Net.Commands": {
+              "target": "Package",
+              "version": "[2.3.1, )"
+            },
+            "Discord.Net.Core": {
+              "target": "Package",
+              "version": "[2.3.1, )"
+            },
+            "Discord.Net.WebSocket": {
+              "target": "Package",
+              "version": "[2.3.1, )"
             }
           },
           "imports": [
