@@ -41,6 +41,7 @@ namespace DiscordBot
             //Če ima sporočilo prefix znak ! 
             if (message.HasCharPrefix('!', ref argPos)) 
             {
+                //Vsako komando nam shrani v konzolo, kjer jo tudi lahko vidimo potem
                 Console.WriteLine(context.User + "(" + DateTime.Now + ") - " +  message);
                 var result = await _service.ExecuteAsync(context, argPos, _serProvider);
 

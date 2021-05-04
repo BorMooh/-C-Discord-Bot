@@ -45,24 +45,51 @@ namespace DiscordBot.Modules
             //await ReplyAsync($"{userInfo.Username}#{userInfo.Discriminator}");
         }
 
+        //50/50 - Ali je poklicana oseba idiot? 
         [Command("Idiot")]
         public async Task Idiot()
         {
             Random r = new Random();
             int st =r.Next(0, 500);
-
-
             string rez = Context.User.Mention.ToString();
 
             if(st >= 250)
                  rez += ": Ti NISI idiot :thinking:";
-
             else
-                rez += ": Ti SI idiot lmaokai";
-
-
+                rez += ": Ti SI idiot :thinking:";
             await Context.Channel.SendMessageAsync(rez);
             //await ReplyAsync($"{userInfo.Username}#{userInfo.Discriminator}");
         }
+
+        //Komanda za sortiranje številk 
+        [Command("Sort")]
+        public async Task Sort(params int[] array)
+        {
+            List<int> arrayTemp = new List<int>();
+            string vrn = "";
+
+            if (array.Length >= 2)
+            {
+                for (int i = 0; i < array.Length; i++)
+                {
+                    arrayTemp.Add(array[i]);
+                }
+                arrayTemp.Sort();
+                foreach (int st in arrayTemp)
+                {
+                    vrn += st + " ";
+                }
+            }
+            else
+            {
+                await Context.Channel.SendMessageAsync("Enter at least 2 numbers");
+                return;
+            }
+
+
+            await Context.Channel.SendMessageAsync(vrn);
+        }
+
+
     }
 }

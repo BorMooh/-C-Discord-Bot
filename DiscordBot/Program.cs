@@ -7,10 +7,17 @@ namespace DiscordBot
 {
     public class Program
     {
+
         static void Main(string[] args)
         => new Program().StartAsync().GetAwaiter().GetResult();
 
         //https://youtu.be/egq26JwyJkc?t=953
+        //https://docs.stillu.cc/guides/introduction/intro.html
+
+        /*      TODO
+         *     -Play music
+         *     -More commands
+         */
 
         private DiscordSocketClient _client;
         private CommandHandler _handler;
@@ -22,20 +29,31 @@ namespace DiscordBot
             _client = new DiscordSocketClient();
 
             await _client.LoginAsync(TokenType.Bot, token);
-
             await _client.StartAsync();
 
             _handler = new CommandHandler(_client);
 
-            //Ko je bot pripravljen nam v konzolo napiše
+            //Ko je BOT pripravljen
             _client.Ready += () =>
             {
-                Console.WriteLine("Bot is connected - (" + DateTime.Now + ")");
-                Console.WriteLine("---------------------------------------------");
+                StartUP();
+
                 return Task.CompletedTask;
             };
+            
+            await Task.Delay(-1);   
+        }
 
-            await Task.Delay(-1);
+
+        //Metoda, ki nastavi nastavitve konzole in izpiše da je BOT online
+        static void StartUP()
+        {
+            Console.BackgroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.Clear();
+
+            Console.WriteLine("Bot is connected - (" + DateTime.Now + ")");
+            Console.WriteLine("---------------------------------------------");
         }
     }
 }
