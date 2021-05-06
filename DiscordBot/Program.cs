@@ -16,7 +16,7 @@ namespace DiscordBot
 
         /*      TODO
          *     -Play music
-         *     -More commands
+         *     -More commands (INFO, MC start)
          */
 
         private DiscordSocketClient _client;

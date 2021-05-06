@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Discord.WebSocket;
+using System.Diagnostics;
 
 namespace DiscordBot.Modules
 {
@@ -90,6 +91,19 @@ namespace DiscordBot.Modules
             await Context.Channel.SendMessageAsync(vrn);
         }
 
+        [Command("Start")] // Ime commanda 
+        public async Task Start(string ponovi) //Glava metode, parameter je opcionalen lahko
+        {
+            string jarPath = "D:\\Minecraftserver\\server.jar";
+            string argumentsFortheJarFile = "";
 
+
+            Process clientProcess = new Process();
+            clientProcess.StartInfo.FileName = "java";
+            clientProcess.StartInfo.Arguments = @"-jar " + jarPath + " " + argumentsFortheJarFile;
+            clientProcess.Start();
+
+            await Context.Channel.SendMessageAsync("Server has been started!");
+        }
     }
 }
