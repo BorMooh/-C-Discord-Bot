@@ -92,16 +92,10 @@ namespace DiscordBot.Modules
         }
 
         [Command("Start")] // Ime commanda 
-        public async Task Start(string ponovi) //Glava metode, parameter je opcionalen lahko
+        public async Task Start() //Glava metode, parameter je opcionalen lahko
         {
-            string jarPath = "D:\\Minecraftserver\\server.jar";
-            string argumentsFortheJarFile = "";
+            Process.Start("Batch/ServerStart.bat");
 
-
-            Process clientProcess = new Process();
-            clientProcess.StartInfo.FileName = "java";
-            clientProcess.StartInfo.Arguments = @"-jar " + jarPath + " " + argumentsFortheJarFile;
-            clientProcess.Start();
 
             await Context.Channel.SendMessageAsync("Server has been started!");
         }
