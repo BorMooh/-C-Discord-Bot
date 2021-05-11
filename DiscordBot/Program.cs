@@ -11,12 +11,12 @@ namespace DiscordBot
         static void Main(string[] args)
         => new Program().StartAsync().GetAwaiter().GetResult();
 
-        //https://youtu.be/egq26JwyJkc?t=953
         //https://docs.stillu.cc/guides/introduction/intro.html
 
         /*      TODO
          *     -Play music
-         *     -More commands (INFO, MC start)
+         *     -More commands (INFO, MC start) +
+         *     -Output: Use EmbedBuilder + StringBuilder 
          */
 
         private DiscordSocketClient _client;

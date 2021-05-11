@@ -3,6 +3,7 @@ using Discord;
 using Discord.Commands;
 using System.Reflection;
 using System.Threading.Tasks;
+using System.IO;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -38,6 +39,7 @@ namespace DiscordBot
             var context = new SocketCommandContext(_client, message);
             int argPos = 0;
 
+
             //Če ima sporočilo prefix znak ! 
             if (message.HasCharPrefix('!', ref argPos)) 
             {
@@ -50,6 +52,7 @@ namespace DiscordBot
                 {
                     await context.Channel.SendMessageAsync(result.ErrorReason);
                 }
+
             }
 
         }

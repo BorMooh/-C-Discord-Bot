@@ -1,6 +1,7 @@
 ﻿using Discord.Commands;
 using Discord;
 using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,14 +12,34 @@ namespace DiscordBot.Modules
 {
     public class Commands : ModuleBase<SocketCommandContext>
     {
+        //Javne spremenljivke
+        Random r = new Random();
 
+        //Gradniki za oblikovanje outputa 
+        EmbedBuilder embed = new EmbedBuilder();
+        StringBuilder sb = new StringBuilder();
+
+
+        //--------------------------------------------------------------KOMANDE--------------------------------------------------------------//
         [Command("Test")] // Ime commanda 
         [Summary("testna komanda")]
         public async Task Prva(string ponovi) //Glava metode, parameter je opcionalen lahko
         {
             await Context.Channel.SendMessageAsync(ponovi);
         }
-            
+
+
+        [Command("Info")]
+        public async Task Info()
+        {
+            string infoS = "Random x,y - get a random number between X and Y\n" +
+                           "GetUser - tag the user who called the command \n" +
+                           "Sort x y z - sort the specified numbers\n" +
+                           "Start - start the MC server" +
+                           "RPS x - Rock paper scissors";
+
+            await Context.Channel.SendMessageAsync(infoS);
+        }
 
         [Command("User")]
         public async Task Druga(IGuildUser user)
@@ -91,13 +112,94 @@ namespace DiscordBot.Modules
             await Context.Channel.SendMessageAsync(vrn);
         }
 
-        [Command("Start")] // Ime commanda 
-        public async Task Start() //Glava metode, parameter je opcionalen lahko
+        //Komanda za minecraft server startup
+        [Command("Start")] 
+        public async Task Start() //Glava metode
         {
+            //Začene se batch datoteka, ki začene program tipa .jar
             Process.Start("Batch/ServerStart.bat");
 
 
             await Context.Channel.SendMessageAsync("Server has been started!");
         }
+
+        //Rock paper scissors
+        [Command("RPS")]
+        public async Task RPS(string izbira)
+        {
+            //Validacija če je uporabnik dejansko napisal dovoljen niz
+            if(izbira.ToLower() == "rock" || izbira.ToLower() == "paper" || izbira.ToLower() == "scissors")
+            {
+                //Bot dobi random vrednost iz arraya "moznosti"
+                int rand = r.Next(0, 3);
+                string[] moznosti = { "rock", "paper", "scissors" };
+                string AISelected = moznosti[rand];
+
+
+                //Vrednost nastavimo na tied ker se v switch pogoju ne preverja če je tied
+                string result = "tied";
+
+                //Program preveri najprej vnos uporabnika
+                switch(izbira)
+                {
+                    //Če je uporabnik izbral "rock"
+                    case "rock":
+                        if(AISelected == "paper") //Ali je bot izbral "paper"?
+                        {
+                            result = "AI won!";
+                        }
+                        else if(AISelected == "scissors")
+                        {
+                            result = "player won!";
+                        }
+                        break;
+
+                    //Če je uporabnik izbral "paper"
+                    case "paper":
+                        if (AISelected == "scissors")
+                        {
+                            result = "AI won!";
+                        }
+                        else if (AISelected == "rock")
+                        {
+                            result = "player won!";
+                        }
+                        break;
+
+                    //Če je uporabnik izbral "scissors"
+                    case "scissors":
+                        if (AISelected == "rock")
+                        {
+                            result = "AI won!";
+                        }
+                        else if (AISelected == "paper")
+                        {
+                            result = "player won!";
+                        }
+                        break;
+                }
+
+                //Izpis
+                embed.Title = "ROCK PAPER SCISSORS";
+                embed.Color = Color.DarkBlue;
+                sb.AppendLine("Player used: " + izbira);
+                sb.AppendLine();
+                sb.AppendLine("BOT used: " + AISelected);
+                sb.AppendLine();
+                sb.AppendLine($"RESULT: **{result}**");
+
+                embed.Description = sb.ToString();
+                await ReplyAsync(null, false, embed.Build());
+            }
+            else
+            {
+                //Napiše error da je uporabnik vnesel napačen niz.
+                await Context.Channel.SendMessageAsync("Check you input!\nHas to be \"rock\", \"paper\" or \"scissors\".");
+            }
+
+        }
+
+
     }
+
 }
