@@ -23,6 +23,7 @@ namespace DiscordBot
          *     -Google search 
          *     -remind me
          *     -covid cases? 
+         *     -MC SERVER - can only start once
          */
 
         private DiscordSocketClient _client;

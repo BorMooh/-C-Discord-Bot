@@ -14,6 +14,7 @@ namespace DiscordBot.Modules
     {
         //Javne spremenljivke
         Random r = new Random();
+        bool serverStarted = false;
 
         //Gradniki za oblikovanje outputa 
         EmbedBuilder embed = new EmbedBuilder();
@@ -101,26 +102,51 @@ namespace DiscordBot.Modules
                 {
                     vrn += st + " ";
                 }
+
+                
+                await Context.Channel.SendMessageAsync(vrn);
             }
             else
             {
+
+
                 await Context.Channel.SendMessageAsync("Enter at least 2 numbers");
                 return;
             }
 
 
-            await Context.Channel.SendMessageAsync(vrn);
         }
 
         //Komanda za minecraft server startup
         [Command("Start")] 
         public async Task Start() //Glava metode
         {
-            //Začene se batch datoteka, ki začene program tipa .jar
-            Process.Start("Batch/ServerStart.bat");
+            if(serverStarted == false)
+            {
+                //Začene se batch datoteka, ki začene program tipa .jar
+                Process.Start("Batch/ServerStart.bat");
+                serverStarted = true;
+                //await Context.Channel.SendMessageAsync("Server has been started!");
 
+                embed.Title = "MINECRAFT SERVER";
+                embed.Color = Color.Green;
 
-            await Context.Channel.SendMessageAsync("Server has been started!");
+                sb.AppendLine("The server has been started!");
+                sb.AppendLine();
+
+                embed.Description = sb.ToString();
+                await ReplyAsync(null, false, embed.Build());
+            }
+            else
+            {
+                embed.Title = "MINECRAFT SERVER";
+                embed.Color = Color.Red;
+
+                sb.AppendLine("The server is already up!");
+
+                embed.Description = sb.ToString();
+                await ReplyAsync(null, false, embed.Build());
+            }
         }
 
         //Rock paper scissors
@@ -227,32 +253,22 @@ namespace DiscordBot.Modules
 
         }
 
-        //Coin flip - za parameter lahko vnese kolikokrat se kovanec obrne
+        //Coin flip 
         [Command("Flip")]
-        public async Task Flip(int i = 1)
+        public async Task Flip()
         {
-            //Preverjanje vnosa uporabnika
-            if(i <= 0)
-            {
-                //Vnos je nepravilen! Ali pa da samo nastavim vrednost na 1?
-            }
-            //V tem primeru je vnos pravilen 
-            else
-            {
-                //Zanka ki se izvede tolikokrat ko je uporabnik vnesel (minimalno 1) 
-                int flipVal = 1;
-                for (int ii = 0; ii < i; i++)
-                {
-                    flipVal = r.Next(0, 2);
-                }
-                string flipSelected = "Heads";
-                if (flipVal == 1)
-                {
-                    flipSelected = "Tails";
-                }
-            }
+            //Pridobivanje random številke med 0 in 1
+            int flipVal = r.Next(0,2);
+            string user = Context.User.Mention.ToString();
 
+            //Privzeto je nastavljeno na "heads"
+            string flipSelected = "heads";
 
+            //Če je pa izbrano število 1 pa nastavimo na "tails"
+            if (flipVal == 1) 
+                flipSelected = "tails";
+
+            await Context.Channel.SendMessageAsync($"@{user} **{flipSelected}**");
         }
     }
 
