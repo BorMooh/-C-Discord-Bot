@@ -130,6 +130,7 @@ namespace DiscordBot.Modules
             //Validacija če je uporabnik dejansko napisal dovoljen niz
             if(izbira.ToLower() == "rock" || izbira.ToLower() == "paper" || izbira.ToLower() == "scissors")
             {
+
                 //Bot dobi random vrednost iz arraya "moznosti"
                 int rand = r.Next(0, 3);
                 string[] moznosti = { "rock", "paper", "scissors" };
@@ -178,28 +179,81 @@ namespace DiscordBot.Modules
                         }
                         break;
                 }
+                //Če je AI ali uporabnik izbal paper, se njegova vrednost za output spremeni na newspaper - za prikaz emojija :newspaper: 
+                //Emoji :paper: ne obstaja, zato je to potrebno 
+                string AiOutput = AISelected;
+                string izbiraOutput = izbira;
+                if (izbiraOutput == "paper")
+                {
+                    izbiraOutput = "newspaper";
+                }
+                if(AiOutput == "paper")
+                {
+                    AiOutput = "newspaper";
+                }
 
                 //Izpis
                 embed.Title = "ROCK PAPER SCISSORS";
                 embed.Color = Color.DarkBlue;
-                sb.AppendLine("Player used: " + izbira);
+                sb.AppendLine($"Player used: :{izbiraOutput}: **{izbira.ToUpper()}** :{izbiraOutput}:");
                 sb.AppendLine();
-                sb.AppendLine("BOT used: " + AISelected);
+                sb.AppendLine($"BOT used: :{AiOutput}: **{AISelected.ToUpper()}** :{AiOutput}:");
+                sb.AppendLine();
+                sb.AppendLine($":{izbiraOutput}: VS :{AiOutput}:");
                 sb.AppendLine();
                 sb.AppendLine($"RESULT: **{result}**");
 
                 embed.Description = sb.ToString();
                 await ReplyAsync(null, false, embed.Build());
             }
+
+            //Napiše error da je uporabnik vnesel napačen niz.
             else
-            {
-                //Napiše error da je uporabnik vnesel napačen niz.
-                await Context.Channel.SendMessageAsync("Check you input!\nHas to be \"rock\", \"paper\" or \"scissors\".");
+            { 
+                embed.Title = "ROCK PAPER SCISSORS";
+                embed.Color = Color.Red;
+
+                sb.AppendLine("ERROR!");
+                sb.AppendLine();
+                sb.AppendLine("Please check your input!");
+                sb.AppendLine();
+                sb.AppendLine("You can only use: ");
+                sb.AppendLine(":rock: Rock\n:newspaper: Paper\n :scissors: Scissors");
+
+                embed.Description = sb.ToString();
+
+                await ReplyAsync(null, false, embed.Build());
             }
 
         }
 
+        //Coin flip - za parameter lahko vnese kolikokrat se kovanec obrne
+        [Command("Flip")]
+        public async Task Flip(int i = 1)
+        {
+            //Preverjanje vnosa uporabnika
+            if(i <= 0)
+            {
+                //Vnos je nepravilen! Ali pa da samo nastavim vrednost na 1?
+            }
+            //V tem primeru je vnos pravilen 
+            else
+            {
+                //Zanka ki se izvede tolikokrat ko je uporabnik vnesel (minimalno 1) 
+                int flipVal = 1;
+                for (int ii = 0; ii < i; i++)
+                {
+                    flipVal = r.Next(0, 2);
+                }
+                string flipSelected = "Heads";
+                if (flipVal == 1)
+                {
+                    flipSelected = "Tails";
+                }
+            }
 
+
+        }
     }
 
 }

@@ -12,11 +12,17 @@ namespace DiscordBot
         => new Program().StartAsync().GetAwaiter().GetResult();
 
         //https://docs.stillu.cc/guides/introduction/intro.html
+        //https://dyno.gg/commands#/Fun
 
         /*      TODO
          *     -Play music
          *     -More commands (INFO, MC start) +
          *     -Output: Use EmbedBuilder + StringBuilder 
+         *     -RPS track number of wins for each user 
+         *     -Coin Flip
+         *     -Google search 
+         *     -remind me
+         *     -covid cases? 
          */
 
         private DiscordSocketClient _client;
